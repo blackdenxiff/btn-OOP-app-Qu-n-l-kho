@@ -28,7 +28,7 @@ istream& operator>>(istream& is, hang_hoa& hh) {
     return is;
 }
 
-ostream& operator<<(ostream& os, const hang_hoa& hh) {
+/*ostream& operator<<(ostream& os, hang_hoa& hh) { // dạng bảng
     os << left << setw(10) << hh.ma_hang
        << left << setw(20) << hh.ten_hang
        << left << setw(15) << hh.loai_hang
@@ -39,5 +39,21 @@ ostream& operator<<(ostream& os, const hang_hoa& hh) {
        << left << setw(15) << hh.ngay_san_xuat
        << left << setw(15) << hh.han_su_dung
        << left << setw(30) << hh.mo_ta;
+    return os;
+}*/
+
+ostream& operator<<(ostream& os, hang_hoa& hh) {
+    os << "----------------------------------------\n";
+    os << "Ma hang         : " << hh.ma_hang << "\n";
+    os << "Ten hang        : " << hh.ten_hang << "\n";
+    os << "Loai hang       : " << hh.loai_hang << "\n";
+    os << "Don vi tinh     : " << hh.don_vi_tinh << "\n";
+    os << "So luong        : " << hh.so_luong << "\n";
+    os << "Gia ban         : " << fixed << setprecision(2) << hh.gia_ban << "\n";
+    os << "Nha san xuat    : " << hh.nha_san_xuat << "\n";
+    os << "Ngay san xuat   : " << hh.ngay_san_xuat << "\n";
+    os << "Han su dung     : " << hh.han_su_dung << "\n";
+    os << "Mo ta           : " << hh.mo_ta << "\n";
+    os << "----------------------------------------"; // Dòng cuối có thể không cần "\n"
     return os;
 }
