@@ -1,21 +1,27 @@
 #include "GiaoDich.h"
-#include <iostream>
 #include <iomanip>
 #include <ctime>
 #include <sstream>
+
 GiaoDich::GiaoDich() {
     tongTien = 0;
     loiNhuan = 0;
 }
+
+
+
+
 string layNgayHienTai() {
     time_t now = time(0);
     tm* ltm = localtime(&now);
     stringstream ss;
-    ss << setfill('0') << setw(2) << ltm->tm_mday << "/"// cái phần này ở chatgpt dundg hoi vi t emso biết
+    ss << setfill('0') << setw(2) << ltm->tm_mday << "/"
        << setw(2) << 1 + ltm->tm_mon << "/"
        << 1900 + ltm->tm_year;
     return ss.str();
 }
+
+
 
 void GiaoDich::nhapGiaoDich(vector<hang_hoa>& danhSach) {
     cout << "\n=== TẠO HÓA ĐƠN BÁN HÀNG ===\n";
@@ -28,6 +34,7 @@ void GiaoDich::nhapGiaoDich(vector<hang_hoa>& danhSach) {
     int n;
     cout << "Nhập số mặt hàng cần bán: ";
     cin >> n;
+
     for (int i = 0; i < n; ++i) {
         int ma;
         int sl;
@@ -35,6 +42,9 @@ void GiaoDich::nhapGiaoDich(vector<hang_hoa>& danhSach) {
         cin >> ma;
         cout << "Số lượng bán: ";
         cin >> sl;
+
+
+        
         bool found = false;
         for (auto& h : danhSach) {
             if (h.ma_hang == ma) {
@@ -60,7 +70,6 @@ void GiaoDich::xuatGiaoDich() const {
     cout << "\n--- HÓA ĐƠN " << maHoaDon << " ---\n";
     cout << "Ngày bán: " << ngayBan << "\n";
     cout << "Khách hàng: " << tenKhachHang << "\n";
-    cout << "Sản phẩm:\n";
     for (auto& sp : dsHangBan) {
         cout << "- " << sp.first.ten_hang
              << " | SL: " << sp.second
@@ -72,50 +81,47 @@ void GiaoDich::xuatGiaoDich() const {
 }
 double GiaoDich::getTongTien() const { return tongTien; }
 double GiaoDich::getLoiNhuan() const { return loiNhuan; }
-string GiaoDich::getNgayBan() const { return ngayBan; }
 string GiaoDich::getMaHoaDon() const { return maHoaDon; }
 vector<pair<hang_hoa, int>> GiaoDich::getDSHangBan() const { return dsHangBan; }
 void GiaoDich::ghiVaoFile(ofstream& fout) const {
-    int len;
+    size_t len;
     len = maHoaDon.size();
-    fout.write((char*)&len, sizeof(int));
+    fout.write((char*)&len, sizeof(len));
     fout.write(maHoaDon.c_str(), len);
     len = ngayBan.size();
-    fout.write((char*)&len, sizeof(int));
+    fout.write((char*)&len, sizeof(len));
     fout.write(ngayBan.c_str(), len);
     len = tenKhachHang.size();
-    fout.write((char*)&len, sizeof(int));
+    fout.write((char*)&len, sizeof(len));
     fout.write(tenKhachHang.c_str(), len);
-    fout.write((char*)&tongTien, sizeof(double));
-    fout.write((char*)&loiNhuan, sizeof(double));
+    fout.write((char*)&tongTien, sizeof(tongTien));
+    fout.write((char*)&loiNhuan, sizeof(loiNhuan));
     int soSP = dsHangBan.size();
-    fout.write((char*)&soSP, sizeof(int));
+    fout.write((char*)&soSP, sizeof(soSP));
     for (auto& sp : dsHangBan) {
         fout.write((char*)&sp.first, sizeof(hang_hoa));
         fout.write((char*)&sp.second, sizeof(int));
     }
 }
 void GiaoDich::docTuFile(ifstream& fin) {
-    int len;
+    size_t len;
     char buffer[100];
-    fin.read((char*)&len, sizeof(int));
+    fin.read((char*)&len, sizeof(len));
     fin.read(buffer, len);
     buffer[len] = '\0';
     maHoaDon = buffer;
-
-    fin.read((char*)&len, sizeof(int));
+    fin.read((char*)&len, sizeof(len));
     fin.read(buffer, len);
     buffer[len] = '\0';
     ngayBan = buffer;
-
-    fin.read((char*)&len, sizeof(int));
+    fin.read((char*)&len, sizeof(len));
     fin.read(buffer, len);
     buffer[len] = '\0';
     tenKhachHang = buffer;
-    fin.read((char*)&tongTien, sizeof(double));
-    fin.read((char*)&loiNhuan, sizeof(double));
+    fin.read((char*)&tongTien, sizeof(tongTien));
+    fin.read((char*)&loiNhuan, sizeof(loiNhuan));
     int soSP;
-    fin.read((char*)&soSP, sizeof(int));
+    fin.read((char*)&soSP, sizeof(soSP));
     dsHangBan.clear();
     for (int i = 0; i < soSP; ++i) {
         hang_hoa hh;
