@@ -1,6 +1,4 @@
 #pragma once
-#include <vector>
-#include <string>
 #include "class_tong.h"
 using namespace std;
 class GiaoDich {
@@ -17,10 +15,8 @@ public:
     void xuatGiaoDich() const;
     double getTongTien() const;
     double getLoiNhuan() const;
-    string getNgayBan() const;
     string getMaHoaDon() const;
     vector<pair<hang_hoa, int>> getDSHangBan() const;
     void ghiVaoFile(ofstream& fout) const;
     void docTuFile(ifstream& fin);
 };
-
