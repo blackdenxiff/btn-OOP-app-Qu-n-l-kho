@@ -1,8 +1,8 @@
 #pragma once
 #include "GiaoDich.h"
-
-
-
+#include "kho_hang.h"
+#include <vector>
+using namespace std;
 class QuanLyBanHang {
 private:
     vector<GiaoDich> dsGiaoDich;
@@ -11,6 +11,6 @@ public:
     void xuatTatCaHoaDon() const;
     void baoCaoDoanhThu() const;
     void sanPhamBanChay() const;
-    void luuFile();
+    void luuFile() const;
     void docFile();
 };
