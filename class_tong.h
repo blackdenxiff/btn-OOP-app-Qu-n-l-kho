@@ -25,6 +25,9 @@ class kho_hang{
     private:
         vector<hang_hoa> ds_hang_hoa;
     public:
+ vector<hang_hoa>& getDanhSachHangHoa() {
+    return ds_hang_hoa;/// vua sủa để gọi vector heheh
+}
         void them_hang_hoa(); // xong
         void luu_du_lieu(const string& filename, int i = 1);//xong
         void doc_du_lieu(const string& filename);//xong
