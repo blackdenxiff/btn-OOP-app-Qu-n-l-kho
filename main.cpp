@@ -17,7 +17,7 @@ int main() {
 
     // Quản lý bán hàng (phần 5)
     qlbh.docFile();               
-    qlbh.taoHoaDon(kh.ds_hang_hoa); 
+   qlbh.taoHoaDon(kh.getDanhSachHangHoa());//da sua gọi vector
     qlbh.xuatTatCaHoaDon();      
 
     // Báo cáo & phân tích (phần 6)
